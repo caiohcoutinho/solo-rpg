@@ -1,0 +1,1311 @@
+:root {
+  --bg-dark: #0a0e1a;
+  --bg-darker: #05070f;
+  --color-cream: #d4c5a9;
+  --color-gold: #c9b23f;
+  --color-accent: #ff6b35;
+  --color-green: #2fa84f;
+  --color-red: #c41e3a;
+  --border-light: #2a3f5f;
+  --border-accent: #8b6f47;
+
+  color: var(--color-cream);
+  background: var(--bg-dark);
+  font-family: 'Courier New', monospace;
+  font-synthesis: none;
+  line-height: 1.4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg-dark);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.user-entry,
+.system-entry {
+  white-space: pre-wrap;
+}
+
+/* Main Game Container */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-darker);
+  border: 3px solid var(--border-accent);
+}
+
+/* Top Menu Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--bg-dark);
+  border-bottom: 2px solid var(--color-gold);
+  color: var(--color-gold);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.menu-items {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  margin-left: 20px;
+}
+
+.menu-item {
+  cursor: pointer;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-light);
+  padding: 2px 6px;
+  transition: all 0.1s;
+}
+
+.menu-item:hover {
+  background: var(--color-gold);
+  color: var(--bg-dark);
+}
+
+.status-indicator {
+  font-size: 0.75rem;
+  color: var(--color-green);
+}
+
+/* Main Layout */
+.main-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 240px;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  padding: 4px;
+}
+
+/* Left Panel: Bestiary */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-dark);
+  border: 2px solid var(--border-light);
+  padding: 8px;
+  overflow-y: auto;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+}
+
+.combat-sidebar,
+.enemy-section,
+.npc-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 8px;
+}
+
+.enemy-slot,
+.location-block,
+.npc-slot {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+  padding: 6px 2px;
+  min-height: 84px;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-light);
+  text-align: center;
+  transition: all 0.1s;
+}
+
+.panel-header {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--color-gold);
+  border-bottom: 1px solid var(--border-light);
+  padding: 4px 0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.chronicle-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chronicle-header .panel-header {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.mode-indicator {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font: inherit;
+}
+
+.mode-indicator:hover {
+  opacity: 0.8;
+}
+
+.mode-indicator:focus {
+  outline: none;
+}
+
+.mode-options-button {
+  border: 1px solid var(--border-light);
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+.mode-options-button:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.mode-modal {
+  width: min(420px, 92vw);
+  background: var(--bg-dark);
+  border: 2px solid var(--color-gold);
+  padding: 16px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.mode-option-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mode-option-button {
+  padding: 8px 10px;
+  border: 1px solid currentColor;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.mode-option-button:hover {
+  filter: brightness(1.1);
+}
+
+.bestiary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.enemy-block:hover,
+.location-block:hover,
+.npc-slot:hover {
+  border-color: var(--color-accent);
+  background: rgba(255, 107, 53, 0.1);
+}
+
+.enemy-block:hover,
+.location-block-empty,
+.npc-slot-empty {
+  opacity: 0.6;
+}
+
+.enemy-portrait-image,
+.location-portrait-image,
+.npc-portrait-image {
+  width: 100%;
+  height: 100%;
+  max-width: 56px;
+  max-height: 56px;
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.npc-portrait-placeholder {
+  font-size: 1.4rem;
+  color: var(--border-light);
+}
+
+.npc-portrait-image,
+.npc-portrait-placeholder {
+  width: 64px;
+  height: 64px;
+}
+
+.npc-name {
+  font-size: 0.6rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+/* Middle Panel: Chronicle */
+.middle-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-dark);
+  border: 2px solid var(--border-light);
+  padding: 8px;
+}
+
+.chronicle-display {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-light);
+  padding: 8px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.empty-state {
+  color: var(--color-green);
+  text-align: center;
+  padding: 20px;
+}
+
+.log-entry {
+  margin-bottom: 6px;
+  color: var(--color-cream);
+}
+
+.turn-block {
+  width: 100%;
+  display: block;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 8px;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.turn-block:hover {
+  border-color: var(--color-gold);
+  background: rgba(201, 178, 63, 0.12);
+}
+
+.turn-id {
+  display: none;
+  margin-left: 8px;
+  font-size: 0.65rem;
+  color: var(--border-light);
+  visibility: hidden;
+}
+
+.user-entry {
+  color: var(--color-accent);
+}
+
+.system-entry {
+  color: var(--color-cream);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 15, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.turn-modal {
+  width: min(640px, 92vw);
+  background: var(--bg-dark);
+  border: 2px solid var(--color-gold);
+  padding: 16px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.turn-modal-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-gold);
+}
+
+.turn-textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 8px;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-light);
+  color: var(--color-cream);
+  resize: vertical;
+}
+
+.turn-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.action-button {
+  border: 1px solid var(--border-light);
+  padding: 6px 10px;
+  text-transform: uppercase;
+}
+
+.action-button.primary {
+  background: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.action-button.danger {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.action-button.secondary {
+  background: transparent;
+}
+
+.turn-error {
+  margin-top: 8px;
+  color: var(--color-red);
+}
+
+.delete-confirmation {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Chat Input Area */
+.chat-input-area {
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 8px;
+}
+
+.loading-indicator {
+  color: var(--color-green);
+  font-size: 0.8rem;
+  padding: 6px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 6px 8px;
+  background: var(--bg-darker);
+  border: 1px solid var(--border-light);
+  color: var(--color-cream);
+  font-size: 0.8rem;
+}
+
+.chat-input::placeholder {
+  color: var(--border-light);
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.send-button {
+  padding: 6px 12px;
+  background: var(--color-green);
+  color: var(--color-cream);
+  border: 1px solid var(--color-green);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.send-button:hover:not(:disabled) {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.send-button:disabled {
+  background: var(--border-light);
+  border-color: var(--border-light);
+  cursor: not-allowed;
+}
+
+.char-name {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #8b7355;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.char-portrait {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.sheet-section {
+  margin-bottom: 8px;
+  border-bottom: 1px dashed #8b7355;
+  padding-bottom: 6px;
+}
+
+.section-title {
+  font-weight: bold;
+  color: #4a4a4a;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #8b7355;
+  padding-bottom: 2px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  padding: 2px 0;
+  border-bottom: 1px dotted #b8a88a;
+}
+
+.attributes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+.attr {
+  border: 1px solid #8b7355;
+  text-align: center;
+  padding: 4px 2px;
+  background: #f4f0e6;
+}
+
+.attr-label {
+  font-weight: bold;
+  font-size: 0.65rem;
+  color: #4a4a4a;
+}
+
+.attr-value {
+  font-weight: bold;
+  color: #2a2a2a;
+}
+
+.conditions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.condition-tag {
+  border: 1px solid #8b7355;
+  padding: 2px 4px;
+  font-size: 0.65rem;
+  background: #f4f0e6;
+}
+
+/* Bottom Command Bar */
+.bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: var(--bg-dark);
+  border-top: 2px solid var(--color-gold);
+  font-size: 0.75rem;
+}
+
+.command-area {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+.command {
+  cursor: pointer;
+  padding: 2px 6px;
+  border: 1px solid var(--border-light);
+  transition: all 0.1s;
+}
+
+.command:hover {
+  background: var(--color-gold);
+  color: var(--bg-dark);
+}
+
+.command-prompt {
+  color: var(--color-green);
+  font-size: 0.7rem;
+  margin-left: auto;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-accent);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .main-layout {
+    grid-template-columns: 150px 1fr 180px;
+    gap: 3px;
+  }
+
+  .bestiary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .npc-name {
+    font-size: 0.6rem;
+  }
+
+  .character-sheet {
+    font-size: 0.7rem;
+  }
+}
+
+.game-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-layout {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.middle-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.chronicle-display {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chat-input-area {
+  flex-shrink: 0;
+}
+
+.chronicle-display {
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.quick-action-button {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #8f2f18;
+  color: #d7d7d7;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.15s;
+  text-align: center;
+}
+
+.quick-action-button:hover {
+  background: rgba(180, 60, 20, 0.08);
+}
+
+.quick-action-button.challenge {
+  border: 2px solid #c43c1f;
+  color: #ffe0d0;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 8px rgba(196, 60, 31, 0.35);
+}
+
+.quick-action-button.challenge:hover {
+  background: rgba(196, 60, 31, 0.18);
+}
+
+/* Wrapper to handle relative positioning for tooltips */
+.quick-action-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Appended tag styling inside the button */
+.challenge-test-tag {
+  margin-left: 8px;
+  color: #ffb703;
+  /* A warm highlight color fitting your retro borders */
+  font-size: 0.85em;
+  font-weight: bold;
+}
+
+/* Clean, retro-themed terminal tooltip box */
+.challenge-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  /* Positions above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background-color: #0d1117;
+  border: 1px solid #ef4444;
+  /* Match challenge color theme */
+  padding: 10px;
+  z-index: 10;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+  transition: opacity 0.15s ease-in-out, visibility 0.15s;
+  pointer-events: none;
+  /* Prevents cursor interference */
+  font-family: monospace;
+  text-align: left;
+}
+
+/* Tooltip appearance trigger on hover */
+.quick-action-wrapper.has-challenge-tooltip:hover .challenge-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Tooltip Interior Formatting */
+.tooltip-section {
+  font-size: 0.85rem;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.tooltip-section:last-child {
+  margin-bottom: 0;
+}
+
+.tooltip-section .label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.tooltip-section.reward .label {
+  color: #3b82f6;
+  /* Accent color matching Exploration/Blue accents */
+}
+
+.tooltip-section.cost .label {
+  color: #ef4444;
+  /* Challenge alert red */
+}
+
+.tooltip-section.target .label {
+  color: #facc15;
+  /* Challenge alert yellow */
+}
+
+.tooltip-section.reasoning .label {
+  color: #a3e635;
+  /* Challenge alert green */
+}
+
+/* Update the parent container to use flex layout */
+.quick-actions {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  /* Adjust the spacing gap between the two buttons to match your UI padding */
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Force each wrapper to take up exactly equal half-portions of the space */
+.quick-action-wrapper {
+  position: relative;
+  flex: 1 1 0%;
+  /* Grows equally, shrinks equally, starts at 0 base width */
+  min-width: 0;
+  /* Prevents long text from pushing past the 50% boundary */
+}
+
+/* Make sure the buttons stretch to fill their 50% wrapper allocation */
+.quick-action-button {
+  width: 100%;
+  height: 100%;
+  /* Ensures they match heights if one text wraps to 2 lines */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* Stacks description and (STR + ATH) tag beautifully */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Modal Extensions for NPCs Management */
+.location-select-modal,
+.npc-details-modal,
+.npc-select-modal {
+  background: #000;
+  border: 1px solid #333;
+  padding: 15px;
+  width: 420px;
+  max-width: 95vw;
+}
+
+.npc-modal-profile {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.npc-modal-portrait-image {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border: 1px solid #222;
+}
+
+.npc-modal-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.npc-modal-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.npc-modal-background-label {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.npc-modal-background-text {
+  font-size: 12px;
+  color: #ccc;
+  line-height: 1.4;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* Grid layout for selection */
+.npc-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 15px 0;
+  padding-right: 4px;
+}
+
+.npc-selection-card {
+  background: #080808;
+  border: 1px solid #222;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.npc-selection-card:hover {
+  background: #121212;
+  border-color: #444;
+}
+
+.npc-selection-card-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enemy-selection-image,
+.location-selection-image,
+.npc-selection-portrait {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border: 1px solid #333;
+  margin-bottom: 6px;
+}
+
+.npc-selection-name {
+  font-size: 11px;
+  color: #aaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.note-entry-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 4px 0;
+}
+
+/* Note typography styling */
+.note-entry {
+  color: #f59e0b;
+  /* Amber/gold terminal color to distinguish from white/blue text */
+  font-family: monospace;
+  font-size: 13px;
+  background: rgba(245, 158, 11, 0.05);
+  /* Very subtle tint background */
+  border-right: 2px solid #f59e0b;
+  /* Left/Right indicator accent line */
+  padding: 4px 10px;
+  text-align: right;
+  max-width: 80%;
+  /* Prevent wide notes from stretching edge-to-edge */
+}
+
+.location-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.enemy-name,
+.location-name {
+  font-size: 0.5rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  word-break: break-word;
+  text-align: center;
+}
+
+.location-description {
+  font-size: 0.8rem;
+  color: var(--color-cream);
+  text-transform: uppercase;
+  word-break: break-word;
+  text-align: center;
+}
+
+
+.menu-item {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 8px 14px;
+  font: inherit;
+}
+
+.menu-item.active {
+  border-bottom: 2px solid #3b82f6;
+}
+
+.combat-layout,
+.scene-layout,
+.config-layout,
+.context-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.scene-sidebar,
+.config-sidebar,
+.context-sidebar {
+  width: 280px;
+  border-right: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.combat-list,
+.scene-list,
+.config-list,
+.context-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.combat-item,
+.scene-item,
+.config-item,
+.context-item {
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #222;
+  color: inherit;
+  cursor: pointer;
+}
+
+.combat-item:hover,
+.scene-item:hover,
+.config-item:hover,
+.context-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.combat-content,
+.scene-content,
+.config-content,
+.context-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.combat-body,
+.scene-body,
+.config-body,
+.context-body {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.config-body {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  background: #0d1117;
+  /* Use the same background color as the rest of the app */
+  color: #fff;
+  /* Use a contrasting color for the text */
+}
+
+.config-body textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #fff;
+  /* Use a contrasting color for the text */
+  resize: none;
+}
+
+.config-body button {
+  background: #0d1117;
+  /* Use the same background color as the rest of the app */
+  color: #fff;
+  /* Use a contrasting color for the text */
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.config-body button:hover {
+  background: #121212;
+  /* Use a darker background color on hover */
+  color: #fff;
+  /* Use a contrasting color for the text */
+}
+
+.scene-body,
+.context-body {
+  padding: 32px 38px;
+  height: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  color: #c8c0b0;
+  font-family: "Courier New", monospace;
+}
+
+.scene-form,
+.lore-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 900px;
+}
+
+.scene-input,
+.context-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  background: #05070d;
+  color: #d8d0c0;
+
+  border: 1px solid #45454a;
+  border-left: 3px solid #a99a3a;
+
+  font-family: inherit;
+  font-size: 18px;
+  letter-spacing: 1px;
+
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.scene-input::placeholder,
+.scene-textarea::placeholder,
+.context-input::placeholder,
+.context-textarea::placeholder {
+  color: #77736c;
+}
+
+.scene-input:focus,
+.context-input:focus {
+  border-color: #d1bc45;
+  border-left-color: #d1bc45;
+}
+
+.scene-textarea,
+.context-textarea {
+  width: 100%;
+  min-height: 260px;
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  resize: vertical;
+
+  background: #05070d;
+  color: #d8d0c0;
+
+  border: 1px solid #45454a;
+  border-left: 3px solid #a99a3a;
+
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.scene-textarea:focus,
+.context-textarea:focus {
+  border-color: #d1bc45;
+  border-left-color: #d1bc45;
+}
+
+.scene-button,
+.context-button {
+  align-self: flex-end;
+
+  padding: 10px 28px;
+
+  background: #070910;
+  color: #c8b83e;
+
+  border: 1px solid #71652a;
+
+  font-family: inherit;
+  font-size: 16px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.scene-button:hover,
+.context-button:hover {
+  background: #15130a;
+  color: #e2d45c;
+  border-color: #c8b83e;
+}
+
+.scene-button:active,
+.context-button:active {
+  transform: translateY(1px);
+}
+
+.game_tab .main-layout {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr) 300px;
+  height: 100%;
+  min-height: 0;
+}
+
+.game_tab .left-panel {
+  min-width: 0;
+  overflow: hidden;
+  border-right: 1px solid var(--border-color);
+}
+
+.game_tab .middle-panel {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.game_tab .right-panel {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 0;
+  overflow-y: auto;
+  border-left: 1px solid var(--border-color);
+}
+
+.scene-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.85fr);
+  gap: 24px;
+
+  height: calc(100% - 42px);
+  min-height: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.scene-editor {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.generated-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  /* No pink border/background */
+  background: transparent;
+  border-left: 1px solid #343b4a;
+  padding-left: 20px;
+
+  overflow: hidden;
+}
+
+.generated-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.generated-card,
+.task-card {
+  background: #080a11;
+  border: 1px solid #343b4a;
+  padding: 14px;
+}
+
+.generated-card {
+  border-left: 2px solid #b6a323;
+}
+
+.task-card {
+  border-left: 2px solid #3b8edb;
+}
+
+.card-title {
+  margin-bottom: 10px;
+
+  color: #b6a323;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.task-card .card-title {
+  color: #5fa8df;
+}
+
+.generated-card p,
+.task-card p {
+  margin: 0;
+
+  color: #9b9b9b;
+  line-height: 1.5;
+}
+
+.section-title {
+  margin-bottom: 14px;
+
+  color: #b6a323;
+  font-size: 13px;
+  letter-spacing: 2px;
+}

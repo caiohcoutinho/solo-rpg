@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS quick_action (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  turn_id UUID,
+  reasoning TEXT NOT NULL,
+  attribute TEXT NOT NULL,
+  ability TEXT NOT NULL,
+  reward TEXT NOT NULL,
+  cost TEXT NOT NULL,
+  CONSTRAINT fk_turn_id FOREIGN KEY (turn_id) REFERENCES turns(id),
+  CHECK (reasoning IS NOT NULL AND attribute IS NOT NULL AND ability IS NOT NULL AND reward IS NOT NULL AND cost IS NOT NULL)
+);
+
+ALTER TABLE quick_action
+ADD COLUMN IF NOT EXISTS description TEXT,
+ADD COLUMN IF NOT EXISTS is_challenge BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE quick_action
+ALTER COLUMN turn_id SET NOT NULL;
+
+ALTER TABLE quick_action
+DROP CONSTRAINT fk_turn_id,
+ADD CONSTRAINT fk_turn_id
+FOREIGN KEY (turn_id)
+REFERENCES turns(id)
+ON DELETE CASCADE;
+
+ALTER TABLE quick_action
+ALTER COLUMN is_challenge SET NOT NULL,
+ALTER COLUMN is_challenge DROP DEFAULT;
+
+ALTER TABLE quick_action
+ALTER COLUMN reasoning DROP NOT NULL,
+ALTER COLUMN attribute DROP NOT NULL,
+ALTER COLUMN ability DROP NOT NULL,
+ALTER COLUMN reward DROP NOT NULL,
+ALTER COLUMN cost DROP NOT NULL;
+
+ALTER TABLE quick_action
+ADD COLUMN IF NOT EXISTS target smallint;

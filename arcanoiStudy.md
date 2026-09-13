@@ -1,0 +1,16 @@
+- Flux - Decay and reconstructions
+- Intimation - Creating and removing desires
+- Moliate - Mold plasm
+- Pandemonium - Poltergeist?
+- Phantasm - Dreams
+- Usury - Manipulate vital energies
+
+- Embody - Manifest in Skinlands
+    - Whispers
+    - Phantom
+- Lifeweb - Fetters
+    - Sense Strands
+    - Strand Channel
+- Outrage - Force in the lands of the living
+    - Wraithgrasp
+    - Stonehand punch

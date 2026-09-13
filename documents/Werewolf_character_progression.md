@@ -1,0 +1,15 @@
+Scene:
+- 01_01: +5pts Terry (5), +5pts Viccy (5)
+- 01_02: +4pts Terry (9)
+- 01_03: +4pts Viccy (9)
+- 01_04: +4pts Terry (13)
+- Plans:
+    - Terry: Staredown, Gremlins, Renown 4, Open Seal
+    - Viccy: Rite of Dedication, Rite of Shadow Passage, Renown 5, Banish Spirit, Mindspeak
+- 01_05: +5pts Viccy (14)
+    - Viccy: -5pts Rite of Dedication, -5pts Rite of Shadow Passage (4)
+- 01_06: +5pts Terry (18), +5pts Viccy (9)
+    - Terry: -8pts Staredown (10)
+- 01_07: +5pts Terry (15)
+    - Terry: -15pts Honor 3 (0)
+- 01_08: 

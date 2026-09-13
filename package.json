@@ -1,0 +1,40 @@
+{
+  "name": "solo-rpg",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "clear; concurrently \"npm run --env-file=.env dev:server\" \"npm --env-file=.env run dev:client\"",
+    "dev:server": "node main/server/server.js",
+    "dev:client": "vite --host 127.0.0.1 --config vite.config.js",
+    "start": "clear; node main/server/server.js",
+    "build": "clear; vite build --config vite.config.js",
+    "preview": "clear; vite preview --config vite.config.js",
+    "test": "node --test",
+    "coverageNoRemove": "node --test --experimental-test-coverage --test-coverage-include=\"main/**/*.js\" --test-coverage-exclude=\"main/**/*.test.js\" --test-reporter=lcov --test-reporter-destination=lcov.info",
+    "coverage": "clear; rm -f lcov.info; rm -rf coverage; npm run coverageNoRemove",
+    "coverage:watch": "clear; while true; do npm run coverageNoRemove; npm run report; sleep 5; done",
+    "report": "genhtml lcov.info --output-directory coverage"
+  },
+  "dependencies": {
+    "@azure-rest/ai-inference": "latest",
+    "@azure/core-auth": "latest",
+    "@azure/core-sse": "latest",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-llama-cpp": "^3.19.0",
+    "pg": "^8.13.1",
+    "pinia": "^3.0.4",
+    "sinon": "^22.1.0",
+    "vue": "^3.5.13",
+    "winston": "^3.19.0",
+    "zod": "^4.4.3",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
+  }
+}

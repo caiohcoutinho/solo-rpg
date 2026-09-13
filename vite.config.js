@@ -1,0 +1,22 @@
+import vue from "@vitejs/plugin-vue";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  root: "main/client",
+  plugins: [vue()],
+  server: {
+    port: 5173,
+    proxy: {
+      "/api": "http://localhost:3000",
+      "/portraits": "http://localhost:3000",
+      "/ws": {
+        target: "ws://localhost:3000",
+        ws: true,
+      },
+    },
+  },
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+  },
+});

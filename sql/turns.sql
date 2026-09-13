@@ -1,0 +1,37 @@
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS quick_action_1 TEXT;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS is_challenge_1 boolean;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS quick_action_2 TEXT;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS is_challenge_2 boolean;
+
+ALTER TABLE turns
+DROP COLUMN IF EXISTS quick_action_1;
+
+ALTER TABLE turns
+DROP COLUMN IF EXISTS is_challenge_1;
+
+ALTER TABLE turns
+DROP COLUMN IF EXISTS quick_action_2;
+
+ALTER TABLE turns
+DROP COLUMN IF EXISTS is_challenge_2;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS is_note boolean ;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS archived boolean DEFAULT false;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS scene TEXT;
+
+ALTER TABLE turns ALTER COLUMN context DROP NOT NULL;
+
+ALTER TABLE turns
+ADD COLUMN IF NOT EXISTS scene_id UUID REFERENCES scene(id);

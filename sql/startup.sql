@@ -1,0 +1,2 @@
+-- Insert a simple Turn row for Phase1 testing
+INSERT INTO turns (context, result, is_user_action, result_metadata) VALUES ('manual context for testing', 'The fear, the loathing, the terror, the peace, the salvation, the ecstasy, the pain, and the oblivion. That is death. Death is all, and it is nothing.', false, '{}'::jsonb);

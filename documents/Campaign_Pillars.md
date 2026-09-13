@@ -1,0 +1,13 @@
+- Places
+- NPCS
+    - Elias Crowe, tough mentor
+        - Elias Crowe is a gruff, pragmatic hermit who teaches through tough love. He rarely offers comfort, speaks in short, direct sentences, and values survival over reassurance. He answers only what is necessary, expecting others to learn through experience. Though he appears indifferent and often claims he is only being practical, his actions consistently reveal a quiet compassion he refuses to acknowledge.
+        - Never have Elias give long speeches or explain everything at once. He provides only the information needed for the current situation, forcing Harry to ask questions, observe, and learn through experience.
+    - Catherine and Kaetlyn
+        - Struggling?
+        - 
+    - Bethany
+        - Dead or Alive?
+- Mysteries
+- Rules
+    
