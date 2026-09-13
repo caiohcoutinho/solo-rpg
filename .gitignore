@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+chatGPT_apikey
+gemini_apikey
+.DS_Store
+npm-debug.log*
+models/
+coverage/
+lcov.info
